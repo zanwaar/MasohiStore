@@ -68,7 +68,18 @@ class Checkout extends Component
             redirect('/');
         }
     }
-
+    public function batal($order_id)
+    {
+        $order = Order::where('id', $order_id)->first();
+        $order->update(
+            [
+                'status' => 'dibatalkan',
+                'payment_status' => 'cancelled',
+            ]
+        );
+        $this->dispatch('batalorder');
+        // dd($order);
+    }
 
 
     public function placeOrder()
@@ -124,7 +135,8 @@ class Checkout extends Component
             "payment_type" => "bank_transfer",
             "transaction_details" => [
                 "order_id" => $order->id,
-                "gross_amount" =>  $total_price,
+                // "gross_amount" =>  $total_price + $this->finalShippingCost,
+                "gross_amount" =>  1,
             ],
             "bank_transfer"  => [
                 "bank" => $this->banktransfer

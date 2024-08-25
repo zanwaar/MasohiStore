@@ -220,7 +220,7 @@
 
                     <h5 class="card-title">Alamat Pengriman </h5>
                     <P class="card-text">{{ $address->street_address}} , {{ $address->province}} , {{ $address->city}} , {{ $address->subdistrict}} , Kode Pos : {{ $address->zip_code}}</P>
-                    <h5 class="card-title">Pengriman <span class="">{{$order->shipping_method}}</span> | No Resi : {{$noresi}}</h5>
+                    <h5 class="card-title"><span class="">{{$order->shipping_method}}</span> | No Resi : {{$noresi}}</h5>
 
                     <div class="resi ">
                         @if ($error)
