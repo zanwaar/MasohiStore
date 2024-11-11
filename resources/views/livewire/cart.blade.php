@@ -1,107 +1,97 @@
-<div>
-    <div class="page-header text-center" style="background-image: url('assets/images/page-header-bg.jpg')">
-        <div class="container">
-            <h1 class="page-title">Keranjang<span></span></h1>
-        </div><!-- End .container -->
-    </div><!-- End .page-header -->
-    <nav aria-label="breadcrumb" class="breadcrumb-nav">
-        <div class="container">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Keranjang</li>
-            </ol>
-        </div><!-- End .container -->
-    </nav><!-- End .breadcrumb-nav -->
+<div class="w-full max-w-[85rem] py-6 px-4 sm:px-6 lg:px-8 mx-auto">
+    <div class="container mx-auto px-2 sm:px-4">
+        <h1 class="text-xl sm:text-2xl font-semibold mb-4">Keranjang</h1>
+        <div class="flex flex-col gap-4">
+            <div class="w-full">
+                @foreach ($cart_items_merchant as $cart)
+                <div class="bg-white rounded-lg shadow-md p-4 mb-4">
+                    <h3 class="text-base sm:text-lg font-semibold mb-3">{{$cart['merchant_nama']}}</h3>
+                    
+                    <!-- Mobile View -->
+                    <div class="block sm:hidden">
+                        @forelse ($cart['items'] as $cart_item)
+                        <div class="border-b pb-4 mb-4">
+                            <div class="flex items-start gap-3">
+                                <img class="h-20 w-20 object-cover rounded" src="{{url('storage', $cart_item['image'])}}" alt="Product image">
+                                <div class="flex-1">
+                                    <h4 class="font-semibold mb-2">{{$cart_item['name']}}</h4>
+                                    <p class="text-gray-600 mb-2">Rp. {{ Number::currency($cart_item['unit_amount'], '   ')}}</p>
+                                    <div class="flex items-center mb-2">
+                                        <button wire:click="decreaseQty({{$cart_item['product_id']}})" class="border rounded-md py-1 px-3">-</button>
+                                        <span class="text-center w-8">{{$cart_item['quantity']}}</span>
+                                        <button wire:click="increaseQty({{$cart_item['product_id']}})" class="border rounded-md py-1 px-3">+</button>
+                                    </div>
+                                    <p class="font-semibold">Total: Rp. {{ Number::currency($cart_item['total_amount'], '   ')}}</p>
+                                </div>
+                                <button wire:click="removeItem({{$cart_item['product_id']}})" class="bg-slate-300 border-2 border-slate-400 rounded-lg px-3 py-1 hover:bg-red-500 hover:text-white hover:border-red-700">
+                                    <span wire:loading.remove wire:target="removeItem({{$cart_item['product_id']}})">X</span>
+                                    <span wire:loading wire:target="removeItem({{$cart_item['product_id']}})">Removing...</span>
+                                </button>
+                            </div>
+                        </div>
+                        @empty
+                        <div class="text-center py-8">
+                            <p class="text-xl sm:text-2xl font-semibold text-slate-500">No Items available in Cart!</p>
+                        </div>
+                        @endforelse
+                    </div>
 
-    <div class="page-content">
-        <div class="cart">
-            <div class="container">
-
-                <div class="row">
-                    <div class="col-lg-12">
-
-                        <table class="table table-cart table-mobile">
+                    <!-- Desktop View -->
+                    <div class="hidden sm:block overflow-x-auto">
+                        <table class="w-full">
+                            <thead>
+                                <tr>
+                                    <th class="text-left font-semibold">Product</th>
+                                    <th class="text-left font-semibold">Price</th>
+                                    <th class="text-left font-semibold">Quantity</th>
+                                    <th class="text-left font-semibold">Total</th>
+                                    <th class="text-right font-semibold"></th>
+                                </tr>
+                            </thead>
                             <tbody>
-                                @foreach ($cart_items_merchant as $cart )
-
+                                @forelse ($cart['items'] as $cart_item)
                                 <tr>
-                                    <td colspan="4" class="p-0 " style="border: none;">Umkm <strong>{{$cart['merchant_nama']}}</strong> </td>
-                                </tr>
-
-                                <tr>
-                                    <td colspan="4" class="p-0" style="border: none;">
-                                        <table class="table table-cart table-mobile" style="margin-bottom: 0rem;">
-                                            <thead>
-                                                <tr>
-                                                    <th>Product</th>
-                                                    <th>Price</th>
-                                                    <th>Quantity</th>
-                                                    <th>Total</th>
-                                                    <th></th>
-                                                </tr>
-                                            </thead>
-
-                                            <tbody>
-                                                @foreach ($cart['items'] as $cart_item )
-                                                <tr>
-                                                    <td class="product-col">
-                                                        <div class="product">
-                                                            <figure class="product-media">
-                                                                <a href="#">
-                                                                    <img src="{{url ('storage/products/', $cart_item['image'])}}" alt="{{$cart_item['image']}}">
-                                                                </a>
-                                                            </figure>
-
-                                                            <h3 class="product-title">
-                                                                <a href="#">{{$cart_item['name']}}</a>
-                                                            </h3><!-- End .product-title -->
-                                                        </div><!-- End .product -->
-                                                    </td>
-                                                    <td class="price-col" style="width: auto;"> Rp. {{ Number::currency($cart_item['unit_amount'], '   ')}}</td>
-                                                    <td class="">
-                                                        <a wire:click="decreaseQty({{$cart_item['product_id']}})" class="social-icon" style="display: inline-grid !important">-</a>
-                                                        <span class="mr-3 ml-2">{{$cart_item['quantity']}}</span>
-
-                                                        <a wire:click="increaseQty({{$cart_item['product_id']}})" class="social-icon" style="display: inline-grid !important">+</a>
-
-                                                    </td>
-                                                    <td class="total-col" style="width: auto;">Rp. {{ Number::currency($cart_item['total_amount'] , '   ')}}</td>
-                                                    <td class="remove-col"><button wire:click="removeItem({{$cart_item['product_id']}})" class="social-icon bg-danger text-white border-0" style="display: inline-grid !important"><i class="icon-close"></i></button></td>
-                                                </tr>
-                                                @endforeach
-                                            </tbody>
-                                        </table>
-                                    </td>
-                                </tr>
-
-                                <tr style=" background-color: #f9f9f9;">
-                                    <td colspan="4">
-
-                                        <div class="d-flex align-items-end  justify-content-between px-4 flex-column">
-                                            <p class="price-col" style="width: auto;">Total Rp. {{ Number::currency($cart['total_price'], '   ')}}</p>
-                                            <div>
-
-                                                <a href="/checkout/{{$cart['slug']}}" class="btn btn-primary btn-order btn-block">CheckOut </a>
-                                            </div>
-
+                                    <td class="py-4">
+                                        <div class="flex items-center">
+                                            <img class="h-16 w-16 mr-4 object-cover rounded" src="{{url('storage', $cart_item['image'])}}" alt="Product image">
+                                            <span class="font-semibold">{{$cart_item['name']}}</span>
                                         </div>
                                     </td>
+                                    <td class="py-4">Rp. {{ Number::currency($cart_item['unit_amount'], '   ')}}</td>
+                                    <td class="py-4">
+                                        <div class="flex items-center">
+                                            <button wire:click="decreaseQty({{$cart_item['product_id']}})" class="border rounded-md py-2 px-4 mr-2">-</button>
+                                            <span class="text-center w-8">{{$cart_item['quantity']}}</span>
+                                            <button wire:click="increaseQty({{$cart_item['product_id']}})" class="border rounded-md py-2 px-4 ml-2">+</button>
+                                        </div>
+                                    </td>
+                                    <td class="py-4">Rp. {{ Number::currency($cart_item['total_amount'], '   ')}}</td>
+                                    <td class="text-right">
+                                        <button wire:click="removeItem({{$cart_item['product_id']}})" class="bg-slate-300 border-2 border-slate-400 rounded-lg px-3 py-1 hover:bg-red-500 hover:text-white hover:border-red-700">
+                                            <span wire:loading.remove wire:target="removeItem({{$cart_item['product_id']}})">X</span>
+                                            <span wire:loading wire:target="removeItem({{$cart_item['product_id']}})">Removing...</span>
+                                        </button>
+                                    </td>
                                 </tr>
+                                @empty
                                 <tr>
-                                    <td style="border: none;"></td>
+                                    <td colspan="5" class="text-center text-2xl sm:text-4xl font-semibold py-4 text-slate-500">No Items available in Cart!</td>
                                 </tr>
-
-
-                                @endforeach
-
-
+                                @endforelse
                             </tbody>
                         </table>
+                    </div>
 
-                    </div><!-- End .col-lg-9 -->
-
-                </div><!-- End .row -->
-            </div><!-- End .container -->
-        </div><!-- End .cart -->
-    </div><!-- End .page-content -->
+                    <div class="flex flex-col sm:flex-row justify-end items-center gap-3 mt-4">
+                        <p class="text-base sm:text-lg font-semibold">Total Rp. {{ Number::currency($cart['total_price'], '   ')}}</p>
+                        <a href="/checkout/{{$cart['slug']}}" class="w-full sm:w-auto py-2 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-gray-800 text-white hover:bg-gray-900 focus:outline-none focus:bg-gray-900 disabled:opacity-50 disabled:pointer-events-none dark:bg-white dark:text-neutral-800">
+                            CheckOut
+                        </a>
+                    </div>
+                </div>
+                <hr class="border-gray-800 dark:border-white mb-4">
+                @endforeach
+            </div>
+        </div>
+    </div>
 </div>

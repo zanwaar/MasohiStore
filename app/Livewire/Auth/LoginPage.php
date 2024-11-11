@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Auth;
 
-use App\Models\User;
+use Livewire\Attributes\Title;
 use Livewire\Component;
 
-class LoginRegister extends Component
+#[Title('login')]
+class LoginPage extends Component
 {
     public $email;
     public $password;
@@ -25,6 +26,6 @@ class LoginRegister extends Component
     }
     public function render()
     {
-        return view('livewire.login-register');
+        return view('livewire.auth.login-page');
     }
 }

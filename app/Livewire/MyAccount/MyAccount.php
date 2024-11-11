@@ -7,20 +7,21 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
+use Livewire\Features\SupportFileUploads\WithFileUploads;
 
 class MyAccount extends Component
 {
     use LivewireAlert;
+    use WithFileUploads;
     public $modelUser;
-    public $name;
-    public $notlpn;
-    public $email;
+    public $name, $email, $notlpn, $profile_image;
     public array $image = [];
 
     public $current_password;
     public $new_password;
     public $new_password_confirmation;
     public $uploading = false;
+
 
     public function updatedImage()
     {
@@ -52,12 +53,19 @@ class MyAccount extends Component
 
         DB::beginTransaction();
         try {
-            if ($this->image) {
-                foreach ($this->image as $file) {
-                    $validatedData['avatar'] = $file['name'];
-                    Storage::putFileAs('public/avatars', new File($file['path']), $validatedData['avatar']);
-                }
+
+            // Logika untuk menyimpan data, misalnya update ke database
+            if ($this->profile_image) {
+                $path = $this->profile_image->store('profile_images', 'public/avatar');
+                // Update gambar profil di database, jika ada perubahan
+                $validatedData['avatar'] =   $path;
             }
+            // if ($this->image) {
+            //     foreach ($this->image as $file) {
+            //         $validatedData['avatar'] = $file['name'];
+            //         Storage::putFileAs('public/avatars', new File($file['path']), $validatedData['avatar']);
+            //     }
+            // }
             $this->modelUser->update($validatedData);
 
             DB::commit();
@@ -99,6 +107,11 @@ class MyAccount extends Component
                 'notlpn' => $this->notlpn,
                 'email' => $this->email,
             ];
+            // Logika untuk menyimpan data, misalnya update ke database
+            if ($this->profile_image) {
+                $path = $this->profile_image->store('avatars', 'public');
+                $validatedData['avatar'] =  $path;
+            }
             $this->modelUser->update($validatedData);
             DB::commit();
             // Reset properti

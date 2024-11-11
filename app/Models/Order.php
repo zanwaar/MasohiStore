@@ -70,11 +70,11 @@ class Order extends Model
     public function getPaymentStatusColorAttribute()
     {
         $badges = [
-            self::MENUNGGU => 'warning',
-            self::DIBAYAR => 'success',
-            self::GAGAL => 'danger',
-            self::CANCELLED => 'danger',
-            self::DIBATALKAN => 'danger',
+            self::MENUNGGU => 'bg-red-500',
+            self::DIBAYAR => 'teal',
+            self::GAGAL => 'red',
+            self::CANCELLED => 'bg-red-500',
+            self::DIBATALKAN => 'bg-red-500',
         ];
         return $badges[$this->payment_status];
     }
@@ -82,12 +82,12 @@ class Order extends Model
     public function getStatusColorAttribute()
     {
         $badges = [
-            self::BARU => 'primary',
-            self::DIPROSES => 'success',
-            self::DIKIRIM => 'info',
-            self::DITERIMA => 'success',
-            self::DIBATALKAN => 'danger',
-            self::SELESAI => 'success',
+            self::BARU => 'bg-blue-500',
+            self::DIPROSES => 'bg-blue-500',
+            self::DIKIRIM => 'bg-yellow-500',
+            self::DITERIMA => 'bg-blue-500',
+            self::DIBATALKAN => 'bg-red-500',
+            self::SELESAI => 'bg-blue-500',
         ];
 
         return $badges[$this->status];

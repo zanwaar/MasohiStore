@@ -1,256 +1,166 @@
 <div>
-
-    <main class="main">
-        <div class="page-header text-center" style="background-image: url('assets/images/page-header-bg.jpg')">
-            <div class="container">
-                <h1 class="page-title">Order Detail<span>My Order</span></h1>
-            </div><!-- End .container -->
-        </div><!-- End .page-header -->
-        <nav aria-label="breadcrumb" class="breadcrumb-nav mb-3">
-            <div class="container">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                    <li class="breadcrumb-item"><a href="#">My Order</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Order Detail</li>
-                </ol>
-            </div><!-- End .container -->
-        </nav><!-- End .breadcrumb-nav -->
-        <div class="container ">
-
-            <!-- Recent resi -->
-
-            @if ($order->payment_status === 'menunggu')
-            <div class="card card-dashboard">
-                <div class="card-body">
-                    <h3 class="card-title mb-2  text-muted">INFO PEMBAYARAN </h3>
-                    @foreach ($va_numbers as $va)
-                    <div class="row no-gutters ">
-                        <div class="col-md-4">
-                            @if ($va['bank'] == 'bni')
-
-                            <img src="https://cart.hostinger.com/assets/payments/xendit_apm.BNI.svg" alt="briva">
-                            @endif
-                            @if ($va['bank'] == 'bri')
-
-                            <img src="https://cart.hostinger.com/assets/payments/xendit_apm.BRI.svg" alt="briva">
-                            @endif
-                            @if ($va['bank'] == 'bca')
-
-                            <img src="https://cart.hostinger.com/assets/payments/xendit_apm.BCA.svg" alt="briva">
-                            @endif
-                            <p>Segera selesaikan pembayaran untuk memulai proses pengiriman Anda.</p>
-                            <p><strong class="mr-2 ">Expiry Time :<span id="countdown"></span> </strong></p>
-
-                        </div>
-                        <div class="col-md-8 text-right">
-                            <div class="card-body">
-                                <!-- <h5 class="card-title">Bank: {{ $va['bank'] }}</h5> -->
-                                <p class="card-text h4 text-muted"><strong>VA Number</strong> {{ $va['va_number'] }}</p>
-                                <button type="button" class="btn btn-danger " wire:click.prevent="batal('{{$order_id}}')">Batalkan Pemesanan</button>
-                            </div>
-                        </div>
-
+    <div class="max-w-6xl mx-auto p-6 bg-white rounded-lg shadow-lg my-8">
+        <!-- Header Section -->
+        @if ($order->payment_status === 'menunggu')
+        <div class="bg-white shadow-md rounded-lg p-6 mx-auto">
+            <div class="flex items-center gap-2 mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-600">
+                    <path d="M12 22c-4.97 0-9-2.239-9-5s4.03-5 9-5 9 2.239 9 5-4.03 5-9 5z" />
+                    <path d="M12 12c-4.97 0-9-2.239-9-5s4.03-5 9-5 9 2.239 9 5-4.03 5-9 5z" />
+                    <path d="M12 7c-1.657 0-3-1.343-3-3s1.343-3 3-3 3 1.343 3 3-1.343 3-3 3z" />
+                </svg>
+                <h1 class="text-2xl font-bold text-gray-800">INFO PEMBAYARAN</h1>
+            </div>
+            @foreach ($va_numbers as $va)
+            <div class="flex items-start justify-between border-b border-gray-200 pb-4 mb-4">
+                <div class="flex items-center space-x-4">
+                    <!-- Bank Logo -->
+                    @if ($va['bank'] == 'bni')
+                    <img src="https://cart.hostinger.com/assets/payments/xendit_apm.BNI.svg" alt="BNI">
+                    @elseif ($va['bank'] == 'bri')
+                    <img src="https://cart.hostinger.com/assets/payments/xendit_apm.BRI.svg" alt="BRI">
+                    @elseif ($va['bank'] == 'bca')
+                    <img src="https://cart.hostinger.com/assets/payments/xendit_apm.BCA.svg" alt="BCA">
+                    @endif
+                    <div>
+                        <p class="text-gray-600 text-sm">Segera selesaikan pembayaran untuk memulai proses pengiriman Anda.</p>
+                        <p class="text-gray-600 font-semibold mt-1"><i class="fas fa-clock text-red-600"></i> Expiry Time: <span id="countdown" class="text-red-600 font-bold"></span></p>
                     </div>
+                </div>
 
-                    @endforeach
-
+                <!-- VA Number and Actions -->
+                <div class="text-right space-y-2">
+                    <p class="text-lg font-semibold text-gray-800"> <i class="fas fa-credit-card text-blue-600"></i> VA Number: {{ $va['va_number'] }}</p>
+                    <button
+                        type="button"
+                        class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition"
+                        wire:click.prevent="batal('{{ $order_id }}')">
+                        Batalkan Pemesanan
+                    </button>
                 </div>
             </div>
-            @endif
-
-
-
-            <div class="row pb-3">
-                <div class="col-md-3">
-                    <div class="shadow-sm  p-3" style="border-radius: 8px;">
-                        <div class="row d-flex align-items-center">
-                            <div class="col-md-4">
-                                <div class="icon">
-                                    <img src="{{$order->user->avatar_url}}" style="width: 50px;" alt="">
-                                </div>
-                            </div>
-                            <div class="col-md-8">
-                                <div class="info ">
-                                    <h5 class="card-title">Penerima</h5>
-                                    <P class="card-text">{{ $address->full_name }}</P>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-                <div class="col-md-3">
-                    <div class="shadow-sm  p-3" style="border-radius: 8px;">
-                        <div class="row d-flex align-items-center">
-                            <div class="col-md-4">
-                                <div class=" text-center">
-                                    <i class='bx bxs-timer text-muted' style="font-size: 50px;"></i>
-                                </div>
-                            </div>
-                            <div class="col-md-8">
-                                <div class="info ">
-                                    <h5 class="card-title">Tgl Pesanan</h5>
-                                    <P class="card-text">{{$order->created_at->format('d-m-Y')}}</P>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-                <div class="col-md-3">
-                    <div class="shadow-sm  p-3" style="border-radius: 8px;">
-                        <div class="row d-flex align-items-center">
-                            <div class="col-md-4">
-                                <div class="icon">
-                                    <i class='bx bxs-category-alt text-muted' style="font-size: 50px;"></i>
-                                </div>
-                            </div>
-                            <div class="col-md-8">
-                                <div class="info ">
-                                    <h5 class="card-title">Status Pesanan</h5>
-                                    <P class="text-uppercase badge badge-{{$order->status_color}}">{{$order->status }}</P>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-                <div class="col-md-3">
-                    <div class="shadow-sm  p-3" style="border-radius: 8px;">
-                        <div class="row d-flex align-items-center">
-                            <div class="col-md-2">
-                                <div class="icon">
-                                    <i class='bx bx-dollar text-muted' style="font-size: 50px;"></i>
-                                </div>
-                            </div>
-                            <div class="col-md-10">
-                                <div class="info ">
-                                    <h5 class="card-title">Status Pembayaran</h5>
-                                    <P class="text-uppercase badge badge-{{$order->payment_status_color}}">{{$order->payment_status }}</P>
-                                </div>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-            </div>
-            <div class="row pb-3">
-                <div class="col-md-8">
-                    <div class="shadow-sm  p-3" style="border-radius: 8px;">
-                        <table class="table table-cart table-mobile">
-                            <tbody>
-                                <tr>
-                                    <td colspan="4" class="p-0" style="border: none;">
-                                        <table class="table table-cart table-mobile" style="margin-bottom: 0rem;">
-                                            <thead>
-                                                <tr>
-                                                    <th>Product</th>
-                                                    <th>Price</th>
-                                                    <th class="text-center">Quantity</th>
-                                                    <th>Total</th>
-                                                </tr>
-                                            </thead>
-
-                                            <tbody>
-                                                @foreach ($order_items as $item)
-                                                <tr>
-                                                    <td class="product-col">
-                                                        <div class="product">
-                                                            <figure class="product-media">
-                                                                <a href="#">
-                                                                    <img src="{{url ('storage/products/', $item->product->images)}}" alt="{{$item->product->images}}">
-                                                                </a>
-                                                            </figure>
-
-                                                            <h3 class="product-title">
-                                                                <a href="#">{{$item->product->name}}</a>
-                                                            </h3><!-- End .product-title -->
-                                                        </div><!-- End .product -->
-                                                    </td>
-                                                    <td class="price-col" style="width: auto;"> Rp. {{ Number::currency($item->unit_amount, '   ')}}</td>
-                                                    <td class="text-center">
-                                                        <span>{{$item->quantity}}</span>
-                                                    </td>
-                                                    <td class="total-col" style="width: auto;">Rp. {{ Number::currency($item->total_amount , '   ')}}</td>
-                                                </tr>
-                                                @endforeach
-                                            </tbody>
-                                        </table>
-                                    </td>
-                                </tr>
-
-
-
-                            </tbody>
-                        </table>
-                    </div>
-
-
-                </div>
-                <div class="col-md-4">
-                    <div class="shadow-sm  p-3" style="border-radius: 8px;">
-                        <h5 class="card-title pb-3">Summary</h5>
-                        <div class="d-flex justify-content-between">
-                            <P class="card-text ">Subtotal</P>
-                            <P class="card-text text-dark">Rp. {{ Number::currency($order->grand_total , '   ')}}</P>
-
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <P class="card-text">Ongkir</P>
-                            <P class="card-text text-dark">Rp. {{ Number::currency($order->shipping_amont , '   ')}}</P>
-
-                        </div>
-                        <hr>
-
-                        <div class="d-flex justify-content-between">
-                            <h5 class="card-title">Grand Total</h5>
-                            <P class="card-text text-dark">Rp {{ number_format($order->grand_total + $order->shipping_amont, 0, ',', '.') }}</P>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card card-dashboard">
-                <div class="card-body">
-
-                    <h5 class="card-title">Alamat Pengriman </h5>
-                    <P class="card-text">{{ $address->street_address}} , {{ $address->province}} , {{ $address->city}} , {{ $address->subdistrict}} , Kode Pos : {{ $address->zip_code}}</P>
-                    <h5 class="card-title"><span class="">{{$order->shipping_method}}</span> | No Resi : {{$noresi}}</h5>
-
-                    <div class="resi ">
-                        @if ($error)
-                        <div class="">
-                            {{ $error }}
-                        </div>
-                        @else
-                        @foreach ($history as $item)
-                        <div class="resi-item d-flex">
-                            <div class="-label pe-2">
-                                {{ $item['date'] }}
-
-                            </div>
-                            <i class='bi bi-circle-fill resi-badge text-primary align-self-start '></i>
-                            <div class="resi-content">
-                                {{ $item['desc'] }}
-                            </div>
-                        </div><!-- End resi item-->
-                        @endforeach
-
-                        @endif
-                    </div>
-
-                </div>
-            </div><!-- End Recent resi -->
-
-
-
+            @endforeach
         </div>
-    </main><!-- End .main -->
+        @endif
+
+
+        <!-- Order Info Card -->
+        <div class="bg-white border border-gray-200 rounded-lg shadow-sm p-4 mb-6">
+            <h2 class="text-lg font-semibold mb-3">Informasi Pesanan</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <p class="text-gray-600">Penerima: <span class="font-medium text-gray-800">reno bps</span></p>
+                    <p class="text-gray-600">Tgl Pesanan: <span class="font-medium text-gray-800">11-11-2024</span></p>
+                </div>
+                <div>
+                    <p class="text-gray-600">Status Pesanan: <span class="font-medium text-blue-600">baru</span></p>
+                    <p class="text-gray-600">Status Pembayaran: <span class="font-medium text-yellow-600">menunggu</span></p>
+                </div>
+            </div>
+        </div>
+        <!-- Product Details -->
+        <div class="bg-gray-50 p-4 rounded-lg mb-6">
+            <h2 class="text-lg font-semibold mb-3 flex items-center gap-2">
+                <i class="fas fa-box text-gray-600"></i>
+                Detail Produk
+            </h2>
+            @foreach ($order_items as $item)
+
+            <div class="flex items-center gap-4">
+                <img src="/placeholder.svg?height=80&width=80" alt="Sambal Sedap" class="w-20 h-20 object-cover rounded-md">
+                <div class="flex-grow">
+                    <h3 class="font-medium text-gray-800">{{$item->product->name}}</h3>
+                    <p class="text-sm text-gray-600">Rp. {{ Number::currency($item->unit_amount, '   ')}} <span>x {{$item->quantity}}</span></p>
+                    <!-- <p class="text-sm text-gray-600"></p> -->
+                </div>
+                <div class="text-right">
+                    <!-- <p class="font-medium">Rp. {{ Number::currency($item->unit_amount, '   ')}}</p> -->
+                    <p class="font-medium ">Rp. {{ Number::currency($item->total_amount , '   ')}}</p>
+                </div>
+            </div>
+            @endforeach
+        </div>
+
+
+        <!-- Payment Summary -->
+        <div class="bg-gray-50 p-4 rounded-lg mb-6">
+            <h2 class="text-lg font-semibold mb-3">Ringkasan Pembayaran</h2>
+            <div class="space-y-2">
+                <div class="flex justify-between">
+                    <span class="text-gray-600">Subtotal</span>
+                    <span>Rp. {{ Number::currency($order->grand_total , '   ')}}</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-gray-600">Ongkir</span>
+                    <span>Rp. {{ Number::currency($order->shipping_amont , '   ')}}</span>
+                </div>
+                <div class="flex justify-between font-bold pt-2 border-t">
+                    <span>Grand Total</span>
+                    <span>Rp {{ number_format($order->grand_total + $order->shipping_amont, 0, ',', '.') }}</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Shipping Address -->
+        <div class="bg-gray-50 p-4 rounded-lg">
+            <h2 class="text-lg font-semibold mb-3 flex items-center gap-2">
+                <i class="fas fa-map-marker-alt text-gray-600"></i>
+                Alamat Pengiriman
+            </h2>
+            <p class="text-gray-700 mb-4">
+                {{ $address->street_address}} , {{ $address->province}} , {{ $address->city}} , {{ $address->subdistrict}} , <br> Kode Pos : {{ $address->zip_code}}
+            </p>
+            <div class="flex items-center gap-2">
+                <i class="fas fa-truck text-gray-600"></i>
+                <span class="text-gray-600">Layanan: Reguler</span>
+                <span class="text-gray-600 ml-4">No Resi: -</span>
+            </div>
+            <!-- Timeline -->
+            <div class="mt-4">
+                @if ($error)
+                <div class="animate-spin inline-block size-6 border-[3px] border-current border-t-transparent text-blue-600 rounded-full dark:text-blue-500" role="status" aria-label="loading">
+                    <span class="sr-only">Loading...</span>
+                </div>
+                <div class="">
+                    {{ $error }}
+                </div>
+                @else
+                @foreach ($history as $item)
+                <!-- Item -->
+                <div class="flex gap-x-3">
+                    <!-- Left Content -->
+                    <div class="w-16 text-end">
+                        <span class="text-xs text-gray-500 dark:text-neutral-400"> {{ $item['date'] }}</span>
+                    </div>
+                    <!-- End Left Content -->
+
+                    <!-- Icon -->
+                    <div class="relative last:after:hidden after:absolute after:top-7 after:bottom-0 after:start-3.5 after:w-px after:-translate-x-[0.5px] after:bg-gray-200 dark:after:bg-neutral-700">
+                        <div class="relative z-10 size-7 flex justify-center items-center">
+                            <div class="size-2 rounded-full bg-gray-400 dark:bg-neutral-600"></div>
+                        </div>
+                    </div>
+                    <!-- End Icon -->
+
+                    <!-- Right Content -->
+                    <div class="grow pt-0.5 pb-8">
+
+                        <p class="mt-1 text-sm text-gray-600 dark:text-neutral-400">
+                            {{ $item['desc'] }}
+                        </p>
+
+                    </div>
+                    <!-- End Right Content -->
+                </div>
+                @endforeach
+
+                @endif
+                <!-- End Item -->
+            </div>
+            <!-- End Timeline -->
+        </div>
+    </div>
+
 </div>
 @push('scripts')
 

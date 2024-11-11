@@ -149,11 +149,17 @@ class Checkout extends Component
             ],
 
         ]);
+
+        // dd($resp->json());
+
         //popup modal pembayran
         $this->va_numbers = $resp->json()['va_numbers'];
         $this->order_id = $resp->json()['order_id'];
         $this->expiryTime = $resp->json()['expiry_time'];
-        $this->dispatch('cekorder');
+
+        $this->dispatch('cekorder', [
+            'expiryTime' => $this->expiryTime,
+        ]);
         $order->save();
         $address->order_id = $order->id;
         $address->save();

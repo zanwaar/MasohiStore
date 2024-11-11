@@ -38,8 +38,14 @@ class Alamat extends Component
     public $idSubdistrict = null;
     public $zip_code;
 
+    public function mount()
+    {
+
+        $this->fetchProvinces();
+    }
     public function add()
     {
+       
         $this->titelmodal = "ALAMAT BARU";
         $this->dispatch('show');
         $this->fetchProvinces();
@@ -111,7 +117,7 @@ class Alamat extends Component
         if ($this->selectedProvince) {
             list($provinceId, $provinceName) = explode('|', $this->selectedProvince);
             $this->vaProvince = $provinceName;
-            $this->idCity = $provinceId;
+            $this->idProvince = $provinceId;
             $response = Http::withHeaders([
                 'key' => env('RAJAONGKIR_API_KEY')
             ])->get(env('RAJAONGKIR_CITY_URL'), [

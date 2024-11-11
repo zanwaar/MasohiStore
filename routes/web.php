@@ -1,10 +1,13 @@
 <?php
 
 use App\Http\Controllers\PaymentController;
+use App\Livewire\Auth\ForgotPasswordPage;
+use App\Livewire\Auth\LoginPage;
+use App\Livewire\Auth\RegisterPage;
+use App\Livewire\Auth\ResetPasswordPage;
 use App\Livewire\Beranda;
 use App\Livewire\Cart;
 use App\Livewire\Checkout;
-use App\Livewire\LoginRegister;
 use App\Livewire\MyAccount\Alamat;
 use App\Livewire\MyAccount\MyAccount;
 use App\Livewire\MyAccount\Password;
@@ -35,7 +38,10 @@ Route::get('/midtrans/notification', function () {
 });
 Route::middleware('guest')->group(function () {
 
-    Route::get('/login', LoginRegister::class)->name('login');
+    Route::get('/login', LoginPage::class)->name('login');
+    Route::get('/register', RegisterPage::class);
+    Route::get('/forgot', ForgotPasswordPage::class)->name('password.request');
+    Route::get('/reset/{token}', ResetPasswordPage::class)->name('password.reset');
 });
 Route::middleware('auth')->group(function () {
     Route::get('/my-account', MyAccount::class)->name('my.account');
@@ -49,4 +55,7 @@ Route::middleware('auth')->group(function () {
         auth()->logout();
         return redirect('/');
     });
+});
+Route::get("/page", function () {
+    return view("product");
 });
