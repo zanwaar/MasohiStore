@@ -56,6 +56,6 @@ Route::middleware('auth')->group(function () {
         return redirect('/');
     });
 });
-Route::get("/page", function () {
-    return view("product");
+Route::get("/umkm", function () {
+    return view("umk");
 });

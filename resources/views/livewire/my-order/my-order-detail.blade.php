@@ -1,4 +1,8 @@
 <div>
+
+
+
+
     <div class="max-w-6xl mx-auto p-6 bg-white rounded-lg shadow-lg my-8">
         <!-- Header Section -->
         @if ($order->payment_status === 'menunggu')
