@@ -1,4 +1,5 @@
 <div>
+    @livewire('header')
     <div class="flex mt-5">
         <!-- Sidebar -->
         <div class=" min-h-screen   shadow-sm  rounded  border-black">
@@ -41,7 +42,7 @@
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200">
-                 
+
                         @forelse ($orders as $order)
                         <tr>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $order->id }}</td>

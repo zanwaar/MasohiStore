@@ -118,7 +118,7 @@ class Checkout extends Component
         $order->payment_status = 'menunggu';
         $order->status = 'baru';
         $order->shipping_amont = $this->finalShippingCost;
-        $order->shipping_method = $this->selectedShippingService;
+        $order->shipping_method = $this->selectedCourier;
 
 
         $address = new ShippingAddress();

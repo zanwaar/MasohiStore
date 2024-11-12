@@ -29,41 +29,12 @@ class ProductAll extends Component
         ]);
     }
 
-    public function clearall()
-    {
-        $this->select_categories = [];
-    }
-
     public function render()
     {
         $query = Product::with('merchant', 'ratingall');
-
-        if (!empty($this->select_categories)) {
-            $query->whereIn('category_id', $this->select_categories);
-        }
-
         $products = $query->latest()->paginate(6);
-
-        $categoriesWithProductCount = Product::select('category_id', DB::raw('count(*) as product_count'))
-            ->groupBy('category_id')
-            ->having('product_count', '>', 1)
-            ->pluck('product_count', 'category_id');
-
-        $categories = Ketegori::whereIn('id', $categoriesWithProductCount->keys())
-            ->where('is_active', 1)
-            ->get(['id', 'name', 'slug']);
-
-        $categoriesWithCounts = $categories->mapWithKeys(function ($category) use ($categoriesWithProductCount) {
-            return [$category->id => [
-                'name' => $category->name,
-                'slug' => $category->slug,
-                'product_count' => $categoriesWithProductCount[$category->id] ?? 0
-            ]];
-        });
-
         return view('livewire.product-all', [
             'products' => $products,
-            'categoriesWithCounts' => $categoriesWithCounts,
         ]);
     }
 }

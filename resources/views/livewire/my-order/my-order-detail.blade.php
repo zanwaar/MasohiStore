@@ -1,12 +1,12 @@
 <div>
 
-
+    @livewire('header')
 
 
     <div class="max-w-6xl mx-auto p-6 bg-white rounded-lg shadow-lg my-8">
         <!-- Header Section -->
         @if ($order->payment_status === 'menunggu')
-        <div class="bg-white shadow-md rounded-lg p-6 mx-auto">
+        <div class="bg-white shadow-md rounded-lg p-6 mx-auto mb-3">
             <div class="flex items-center gap-2 mb-4">
                 <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-600">
                     <path d="M12 22c-4.97 0-9-2.239-9-5s4.03-5 9-5 9 2.239 9 5-4.03 5-9 5z" />
@@ -53,12 +53,12 @@
             <h2 class="text-lg font-semibold mb-3">Informasi Pesanan</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                    <p class="text-gray-600">Penerima: <span class="font-medium text-gray-800">reno bps</span></p>
-                    <p class="text-gray-600">Tgl Pesanan: <span class="font-medium text-gray-800">11-11-2024</span></p>
+                    <p class="text-gray-600">Penerima: <span class="font-medium text-gray-800">{{ $address->full_name }}</span></p>
+                    <p class="text-gray-600">Tgl Pesanan: <span class="font-medium text-gray-800">{{$order->created_at->format('d-m-Y')}}</span></p>
                 </div>
                 <div>
-                    <p class="text-gray-600">Status Pesanan: <span class="font-medium text-blue-600">baru</span></p>
-                    <p class="text-gray-600">Status Pembayaran: <span class="font-medium text-yellow-600">menunggu</span></p>
+                    <p class="text-gray-600">Status Pesanan: <span class="font-medium text-blue-600">{{$order->status }}</span></p>
+                    <p class="text-gray-600">Status Pembayaran: <span class="font-medium text-yellow-600">{{$order->payment_status }}</span></p>
                 </div>
             </div>
         </div>

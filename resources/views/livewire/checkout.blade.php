@@ -1,5 +1,5 @@
 <div>
-
+@livewire('header')
     <div class="w-full max-w-7xl mx-auto p-4 sm:p-6">
         <form wire:submit.prevent="placeOrder">
             <div class="flex flex-col lg:flex-row gap-6">

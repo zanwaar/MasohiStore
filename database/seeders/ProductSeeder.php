@@ -103,10 +103,9 @@ class ProductSeeder extends Seeder
                     'price' => 100000,
                     'is_active' => true,
                     'in_stock' => true,
-                    'category_id' => 2,
                 ]
             );
-        
+
             Product::create(
                 [
                     'merchant_id' => 1,
@@ -117,7 +116,7 @@ class ProductSeeder extends Seeder
                     'price' => 100000,
                     'is_active' => true,
                     'in_stock' => true,
-                    'category_id' => 2,
+
                 ]
             );
 
@@ -131,7 +130,7 @@ class ProductSeeder extends Seeder
                     'price' => 100000,
                     'is_active' => true,
                     'in_stock' => true,
-                    'category_id' => 12,
+
                 ]
             );
 
@@ -145,7 +144,7 @@ class ProductSeeder extends Seeder
                     'price' => 100000,
                     'is_active' => true,
                     'in_stock' => true,
-                    'category_id' => 2,
+
                 ]
             );
             Product::create(
@@ -158,7 +157,6 @@ class ProductSeeder extends Seeder
                     'price' => 100000,
                     'is_active' => true,
                     'in_stock' => true,
-                    'category_id' => 2,
                 ]
             );
 

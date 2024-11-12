@@ -1,4 +1,5 @@
 <div>
+    @livewire('header')
     <div class="container mx-auto py-8">
         <div class="mb-8 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             <div>

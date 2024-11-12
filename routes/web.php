@@ -13,6 +13,12 @@ use App\Livewire\MyAccount\MyAccount;
 use App\Livewire\MyAccount\Password;
 use App\Livewire\MyOrder\MyOrder;
 use App\Livewire\MyOrder\MyOrderDetail;
+use App\Livewire\Panel\Auth\Login;
+use App\Livewire\Panel\Auth\Register;
+use App\Livewire\Panel\PengaturanUmkm;
+use App\Livewire\Panel\Product\DataProduct;
+use App\Livewire\Panel\Transaksi\DetailOrderTrnsaksi;
+use App\Livewire\Panel\Transaksi\OrderTransasksi;
 use App\Livewire\ProductAll;
 use App\Livewire\ProductDetail;
 use App\Livewire\UmkmPage;
@@ -38,6 +44,8 @@ Route::get('/midtrans/notification', function () {
 });
 Route::middleware('guest')->group(function () {
 
+    Route::get('/panel/login', Login::class)->name('panel.login');
+    Route::get('/panel/register', Register::class)->name('panel.register');
     Route::get('/login', LoginPage::class)->name('login');
     Route::get('/register', RegisterPage::class);
     Route::get('/forgot', ForgotPasswordPage::class)->name('password.request');
@@ -50,6 +58,18 @@ Route::middleware('auth')->group(function () {
     Route::get('/my-order', MyOrder::class)->name('my-order');
     Route::get('/my-orders/{order_id}', MyOrderDetail::class)->name('my-order.detail');
     Route::get('/checkout/{slug}', Checkout::class)->name('checkout');
+
+
+    // merchat
+    // panel
+    Route::middleware('role:merchant')->group(function () {
+        Route::get('/panel', OrderTransasksi::class)->name('beranda');
+        Route::get('/panel/transaksi/{orderID}', DetailOrderTrnsaksi::class)->name('merchant.transaksi.detail');
+        Route::get('/panel/product', DataProduct::class)->name('product');
+        Route::get('/panel/pengaturan', PengaturanUmkm::class)->name('penagturan');
+    });
+
+
 
     Route::get('/logout', function () {
         auth()->logout();
