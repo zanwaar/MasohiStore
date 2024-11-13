@@ -15,6 +15,7 @@ class PaymentController extends Controller
         $serverKey = env('MIDTRANS_SERVER_KEY');
         // Log data yang diterima
         Log::info('Midtrans Notification received', $data);
+        
         // Validasi signature key
         $signatureKey = hash('sha512', $data['order_id'] . $data['status_code'] . $data['gross_amount']  . $serverKey);
         if ($signatureKey !== $data['signature_key']) {

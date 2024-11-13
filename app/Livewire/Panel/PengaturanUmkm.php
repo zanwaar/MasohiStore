@@ -19,26 +19,45 @@ class PengaturanUmkm extends Component
 
     #[Validate('image|max:20480')]
     public $logo;
+    
     #[Validate('image|max:30480')]
     public $banner;
+
+    #[Validate('image|max:30480')]
+    public $ktp;
+
+    #[Validate('image|max:30480')]
+    public $usaha;
+
     public $merchant_id;
     public $merchant_nama;
+    public $merchant_jenis;
     public $merchant_alamat;
+    public $merchant_omzet;
     public $merchant_foto;
     public $merchant_banner;
     public $owner_no_hp;
-    // 'user_id' => 1,
-    // 'owner_nama_lengkap' => $faker->name,
-    // 'owner_no_hp' => $faker->phoneNumber,
-    // 'owner_alamat_lengkap' => $faker->address,
-    // 'owner_no_ktp' => $faker->phoneNumber,
-    // 'owner_ktp_file_url' => 'ktp1.jpg',
-    // 'merchant_nama' => 'G&R Masohi Shop',
-    // 'slug' => 'G&R-Masohi-Shop',
-    // 'merchant_alamat' => $faker->address,
-    // 'merchant_lokasi' => '-3.299317552465129 , 128.96019193664188',
-    // 'merchant_foto' => 'logo1.jpg',
-    // 'merchant_banner' => 'banner1.png',
+    public $owner_nama_lengkap;
+    public $owner_no_ktp;
+    public $owner_alamat_lengkap;
+
+
+//     'user_id' => $user->id,
+//     'owner_nama_lengkap' => $this->state['name'],
+//     'owner_no_ktp' => $this->state['nik'],
+//     'owner_no_hp' => $this->state['tel'],
+//     'owner_alamat_lengkap' => $this->state['alamat'],
+//     'merchant_nama' => $this->state['merchant_nama'],
+//     'merchant_jenis' => $this->state['merchant_jenis'],
+//     'merchant_alamat' => $this->state['merchant_alamat'],
+//     'merchant_omzet' => $this->state['merchant_omzet'],
+//     'slug' => $this->createUniqueSlug($this->state['merchant_nama'], Merchant::class),
+//     'owner_ktp' => $merchant_ktp,
+//     'merchant_usaha' => $merchant_usaha,
+//     'merchant_foto' => $merchant_foto,
+//     'merchant_banner' => $merchant_banner,
+// ]);
+ 
 
     public function mount()
     {

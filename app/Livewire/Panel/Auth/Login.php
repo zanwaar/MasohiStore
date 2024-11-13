@@ -20,7 +20,7 @@ class Login extends Component
             session()->flash('error', 'Invalid credentials');
             return;
         }
-        return redirect()->intended('/');
+        return redirect()->intended('/panel');
     }
     public function render()
     {

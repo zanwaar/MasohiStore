@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
             ProductSeeder::class
         ]);
 
-        sleep(2);
-        \App\Models\Rating::factory(200)->create();
+        // sleep(2);
+        // \App\Models\Rating::factory(200)->create();
     }
 }

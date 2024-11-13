@@ -30,9 +30,9 @@ class MerchantSeeder extends Seeder
                 'slug' => 'G&R-Masohi-Shop',
                 'merchant_alamat' => $faker->address,
                 'merchant_omzet' => $faker->numberBetween(100000, 10000000),
-                'merchant_foto' => 'logo1.jpg',
+                'merchant_foto' => 'ggr.jpg',
                 'merchant_usaha' => 'usaha1.jpg',
-                'merchant_banner' => 'banner1.png',
+                'merchant_banner' => 'banner-ggr.jpg',
             ]);
 
             Merchant::create([
@@ -47,9 +47,9 @@ class MerchantSeeder extends Seeder
                 'slug' => 'VCO-Desa-Yainuelo',
                 'merchant_alamat' => $faker->address,
                 'merchant_omzet' => $faker->numberBetween(100000, 10000000),
-                'merchant_foto' => 'logo2.jpg',
+                'merchant_foto' => 'vco.jpg',
                 'merchant_usaha' => 'usaha2.jpg',
-                'merchant_banner' => 'banner2.png',
+                'merchant_banner' => 'banner-vco.jpg',
             ]);
 
 

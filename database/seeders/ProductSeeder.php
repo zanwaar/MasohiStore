@@ -98,7 +98,7 @@ class ProductSeeder extends Seeder
                     'merchant_id' => 1,
                     'name' => 'Abon Ikan Tuna (Rasa Pedas)',
                     'slug' => 'Abon-Ikan-Tuna-Rasa-Pedas',
-                    'images' => 'ggr2.jpg',
+                    'images' => 'ggr2.jpeg',
                     'description' => $faker->text(500),
                     'price' => 100000,
                     'is_active' => true,
@@ -106,26 +106,26 @@ class ProductSeeder extends Seeder
                 ]
             );
 
-            Product::create(
-                [
-                    'merchant_id' => 1,
-                    'name' => 'Sambal Sedap',
-                    'slug' => 'Sambal-Sedap',
-                    'images' => 'top.jpg',
-                    'description' => $faker->text(500),
-                    'price' => 100000,
-                    'is_active' => true,
-                    'in_stock' => true,
+            // Product::create(
+            //     [
+            //         'merchant_id' => 1,
+            //         'name' => 'Sambal Sedap',
+            //         'slug' => 'Sambal-Sedap',
+            //         'images' => 'top.jpg',
+            //         'description' => $faker->text(500),
+            //         'price' => 100000,
+            //         'is_active' => true,
+            //         'in_stock' => true,
 
-                ]
-            );
+            //     ]
+            // );
 
             Product::create(
                 [
                     'merchant_id' => 2,
                     'name' => 'VCO Neto:200 ml',
                     'slug' => 'VCO-Neto-200-ml',
-                    'images' => 'vco1.png',
+                    'images' => 'vco1.jpg',
                     'description' => $faker->text(500),
                     'price' => 100000,
                     'is_active' => true,
@@ -139,7 +139,7 @@ class ProductSeeder extends Seeder
                     'merchant_id' => 1,
                     'name' => 'Abon Ikan Tuna (Original)',
                     'slug' => 'Abon-Ikan-Tuna-(Original)',
-                    'images' => 'ggr1.jpg',
+                    'images' => 'ggr1.jpeg',
                     'description' => $faker->text(500),
                     'price' => 100000,
                     'is_active' => true,
@@ -147,18 +147,18 @@ class ProductSeeder extends Seeder
 
                 ]
             );
-            Product::create(
-                [
-                    'merchant_id' => 1,
-                    'name' => 'Sambal Ikan',
-                    'slug' => 'Sambal-Ikan',
-                    'images' => 'sam.jpg',
-                    'description' => $faker->text(500),
-                    'price' => 100000,
-                    'is_active' => true,
-                    'in_stock' => true,
-                ]
-            );
+            // Product::create(
+            //     [
+            //         'merchant_id' => 1,
+            //         'name' => 'Sambal Ikan',
+            //         'slug' => 'Sambal-Ikan',
+            //         'images' => 'sam.jpg',
+            //         'description' => $faker->text(500),
+            //         'price' => 100000,
+            //         'is_active' => true,
+            //         'in_stock' => true,
+            //     ]
+            // );
 
             DB::commit();
         } catch (\Throwable $th) {

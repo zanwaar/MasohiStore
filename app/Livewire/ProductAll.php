@@ -28,7 +28,11 @@ class ProductAll extends Component
             'toast' => true,
         ]);
     }
-
+    public function updateSortOption($value)
+    {
+        $this->sortOption = $value;
+        // Additional logic can go here if needed
+    }
     public function getProductsProperty()
     {
         return Product::where(function ($query) {
@@ -45,7 +49,7 @@ class ProductAll extends Component
                 $query->latest();
             })
             ->paginate(10);
-    }
+    }  
 
     public function render()
     {

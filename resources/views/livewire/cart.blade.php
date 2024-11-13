@@ -14,7 +14,7 @@
                             @forelse ($cart['items'] as $cart_item)
                             <div class="border-b pb-4 mb-4">
                                 <div class="flex items-start gap-3">
-                                    <img class="h-20 w-20 object-cover rounded" src="{{url('storage', $cart_item['image'])}}" alt="Product image">
+                                    <img class="h-20 w-20 object-cover rounded" src="{{url('storage/product/', $cart_item['image'])}}" alt="Product image">
                                     <div class="flex-1">
                                         <h4 class="font-semibold mb-2">{{$cart_item['name']}}</h4>
                                         <p class="text-gray-600 mb-2">Rp. {{ Number::currency($cart_item['unit_amount'], '   ')}}</p>
@@ -55,7 +55,7 @@
                                     <tr>
                                         <td class="py-4">
                                             <div class="flex items-center">
-                                                <img class="h-16 w-16 mr-4 object-cover rounded" src="{{url('storage', $cart_item['image'])}}" alt="Product image">
+                                                <img class="h-16 w-16 mr-4 object-cover rounded" src="{{url('storage/products', $cart_item['image'])}}" alt="Product image">
                                                 <span class="font-semibold">{{$cart_item['name']}}</span>
                                             </div>
                                         </td>

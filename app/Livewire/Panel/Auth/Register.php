@@ -128,7 +128,7 @@ class Register extends Component
             DB::commit();
             auth()->login($user);
 
-            return redirect()->intended();
+            return redirect()->intended('/panel');
         } catch (\Exception $e) {
             dd($e);
             DB::rollBack();

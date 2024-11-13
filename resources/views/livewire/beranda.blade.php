@@ -4,10 +4,10 @@
         <section class="space-y-6 pb-8 pt-6 md:pb-12 md:pt-10 lg:py-32">
             <div class="container flex max-w-[64rem] flex-col items-center gap-4 text-center mx-auto px-4">
                 <h1 class="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold">
-                    Platform Marketplace UMKM Indonesia
+                    Platform Marketplace UMKM Masohi
                 </h1>
                 <p class="max-w-[42rem] leading-normal text-gray-600 sm:text-xl sm:leading-8">
-                    Temukan produk-produk berkualitas dari UMKM lokal. Dukung pertumbuhan ekonomi Indonesia melalui transaksi di marketplace kami.
+                    Temukan produk-produk berkualitas dari UMKM lokal. Dukung pertumbuhan ekonomi Masohi melalui transaksi di marketplace kami.
                 </p>
                 <div class="space-x-4">
                     <!-- <a href="/products" class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-gray-800 text-white hover:bg-gray-900 focus:outline-none focus:bg-gray-900 disabled:opacity-50 disabled:pointer-events-none dark:bg-white dark:text-neutral-800">

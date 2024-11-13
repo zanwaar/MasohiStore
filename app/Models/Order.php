@@ -82,10 +82,10 @@ class Order extends Model
     public function getStatusColorAttribute()
     {
         $badges = [
-            self::BARU => 'bg-blue-100 text-blue-800',
+            self::BARU => 'bg-blue-100 text-blue-800 bg-primary',
             self::DIPROSES => 'bg-blue-100 text-blue-800 bg-primary',
             self::DIKIRIM => 'bg-yellow-500 bg-success',
-            self::DITERIMA => 'bg-blue-100 text-blue-800',
+            self::DITERIMA => 'bg-blue-100 text-blue-800 bg-primary',
             self::DIBATALKAN => 'bg-red-100 text-red-800 bg-danger',
             self::SELESAI => 'bg-blue-100 text-blue-800 bg-primary',
         ];
