@@ -8,6 +8,7 @@ use App\Livewire\Auth\ResetPasswordPage;
 use App\Livewire\Beranda;
 use App\Livewire\Cart;
 use App\Livewire\Checkout;
+use App\Livewire\ListUmkm;
 use App\Livewire\MyAccount\Alamat;
 use App\Livewire\MyAccount\MyAccount;
 use App\Livewire\MyAccount\Password;
@@ -37,6 +38,7 @@ Route::get('/product', ProductAll::class)->name('product');
 Route::get('/products/{slug}', ProductDetail::class)->name('product.detail');
 Route::get('/cart', Cart::class)->name('cart');
 Route::get('/umkm/{slug}', UmkmPage::class)->name('page.umkm');
+Route::get('/umkm', ListUmkm::class)->name('umkm');
 
 Route::post('/midtrans/notification', [PaymentController::class, 'handleNotification'])->withoutMiddleware(VerifyCsrfToken::class);
 Route::get('/midtrans/notification', function () {
@@ -75,7 +77,4 @@ Route::middleware('auth')->group(function () {
         auth()->logout();
         return redirect('/');
     });
-});
-Route::get("/umkm", function () {
-    return view("umk");
 });

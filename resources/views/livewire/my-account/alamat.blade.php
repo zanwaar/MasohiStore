@@ -7,7 +7,7 @@
             <h1 class="p-4 space-y-2 font-semibold">Dashboard</h1>
             <nav class="p-4 space-y-2">
                 <!-- Pesanan -->
-                <a href="/my-order" class="flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-md bg-gray-100 text-gray-900 cursor-pointer">
+                <a href="/my-order" class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-100 cursor-pointer">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-500">
                         <path d="M21 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z" />
                         <path d="M3 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z" />
@@ -21,7 +21,7 @@
                 </a>
 
                 <!-- Alamat Pengiriman -->
-                <a href="/my-account/alamat" class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-100 cursor-pointer">
+                <a href="/my-account/alamat" class="flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-md bg-gray-100 text-gray-900 cursor-pointer">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-500">
                         <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
                         <polyline points="9 22 9 12 15 12 15 22" />
@@ -59,7 +59,6 @@
                     <div class="flex justify-between items-center">
                         <div class="d">
                             <h1 class="text-2xl font-bold text-gray-900">Alamat Pengirman Tersimpan</h1>
-                            <p class="text-sm text-gray-500">Selamat datang kembali, lihat overview toko Anda</p>
                         </div>
                         <button wire:click="add()" type="button" class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
                             Alamat Baru
@@ -119,7 +118,7 @@
                                         </tr>
                                         @empty
                                         <tr>
-                                            <th colspan="8" class="text-center">Belum ada Alamat Yang Tersimpan</th>
+                                            <th colspan="8" class="text-center py-3 text-gray-600">Belum ada Alamat Yang Tersimpan</th>
                                         </tr>
                                         @endforelse
 

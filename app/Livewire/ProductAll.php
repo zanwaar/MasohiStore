@@ -13,9 +13,9 @@ use Livewire\Component;
 class ProductAll extends Component
 {
     use LivewireAlert;
-    #[Url()]
-    public $select_categories = [];
-
+    public $sortOption = 'newest';
+    public $searchTerm = null;
+    protected $queryString = ['searchTerm' => ['except' => '']];
     public function addToCart($product_id)
     {
         $total_count = CartManagement::addItemToCart($product_id);
@@ -29,12 +29,29 @@ class ProductAll extends Component
         ]);
     }
 
+    public function getProductsProperty()
+    {
+        return Product::where(function ($query) {
+            $query->where('name', 'like', '%' . $this->searchTerm . '%');
+        })
+            ->when($this->sortOption === 'price-low', function ($query) {
+                $query->orderBy('price', 'asc');
+            })
+            ->when($this->sortOption === 'price-high', function ($query) {
+                $query->orderBy('price', 'desc');
+            })
+       
+            ->when($this->sortOption === 'newest', function ($query) {
+                $query->latest();
+            })
+            ->paginate(10);
+    }
+
     public function render()
     {
-        $query = Product::with('merchant', 'ratingall');
-        $products = $query->latest()->paginate(6);
+
         return view('livewire.product-all', [
-            'products' => $products,
+            'products' => $this->products,
         ]);
     }
 }

@@ -24,8 +24,8 @@ class DataProduct extends Component
     public $kategori;
     public $product_foto;
     public $product_id;
-    public $searchTerm = null;
     public $merchant_id;
+    public $searchTerm = null;
     protected $queryString = ['searchTerm' => ['except' => '']];
 
     public function mount()

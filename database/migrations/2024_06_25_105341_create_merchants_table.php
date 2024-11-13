@@ -14,16 +14,18 @@ return new class extends Migration
         Schema::create('merchants', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
-            // $table->string('owner_nama_lengkap');
+            $table->string('owner_nama_lengkap');
             $table->string('owner_no_hp');
-            // $table->string('owner_alamat_lengkap');
-            // $table->string('owner_no_ktp');
-            // $table->string('owner_ktp_file_url');
+            $table->string('owner_alamat_lengkap');
+            $table->string('owner_no_ktp');
+            $table->string('owner_ktp');
             $table->string('merchant_nama');
+            $table->string('merchant_jenis');
             $table->string('slug');
             $table->string('merchant_alamat');
-            // $table->string('merchant_lokasi');
+            $table->string('merchant_omzet');
             $table->string('merchant_foto');
+            $table->string('merchant_usaha');
             $table->string('merchant_banner');
             $table->timestamps();
         });
